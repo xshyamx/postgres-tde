@@ -23,3 +23,14 @@ alter user vagrant with password 'vagrant';
 select rolpassword from pg_authid where rolname = 'vagrant';"
 
 /usr/local/pg12tde/bin/pg_ctl -D /var/data/pg/db12tde reload
+
+cat <<EOF
+PostgreSQL with TDE started 
+
+JDBC Connection Parameters
+==========================
+
+     URL: jdbc:postgresql://localhost:5432/postgres
+USERNAME: vagrant
+PASSWORD: vagrant
+EOF
