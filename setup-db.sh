@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 sudo mkdir -p /var/data/pg/keys /var/data/pg/db12tde
-cp /vagrant/provide-key.sh /var/data/pg/keys
-chmod +x /var/data/pg/keys/provide-key.sh
+sudo cp /vagrant/provide-key.sh /var/data/pg/keys
+sudo chmod +x /var/data/pg/keys/provide-key.sh
 sudo chown -R vagrant:vagrant /var/data/pg/db12tde /var/data/pg/keys
 
 # find locale by
