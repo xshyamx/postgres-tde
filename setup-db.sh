@@ -11,4 +11,15 @@ sudo chown -R vagrant:vagrant /var/data/pg/db12tde /var/data/pg/keys
 			 -K /var/data/pg/keys/provide-key.sh \
 			 --locale=en_US.utf8
 
+sed -i "s/#listen_addresses/listen_addresses = '*'\n#listen_addresses/" /var/data/pg/db12tde/postgresql.conf
+sed -i "s/#password_encryption/password_encryption = scram-sha-256\n#password_encryption/" /var/data/pg/db12tde/postgresql.conf
+
+echo 'host    all             all             0.0.0.0/0               scram-sha-256' >> /var/data/pg/db12tde/pg_hba.conf
+
 /usr/local/pg12tde/bin/pg_ctl -D /var/data/pg/db12tde start
+
+/usr/local/pg12tde/bin/psql postgres -c "show password_encryption;
+alter user vagrant with password 'vagrant';
+select rolpassword from pg_authid where rolname = 'vagrant';"
+
+/usr/local/pg12tde/bin/pg_ctl -D /var/data/pg/db12tde reload
